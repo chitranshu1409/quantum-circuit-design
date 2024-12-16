@@ -1,0 +1,24 @@
+from qiskit import QuantumCircuit
+from qiskit.visualization import circuit_drawer
+import matplotlib.pyplot as plt
+
+# Step 1: Create a quantum circuit with 3 qubits and 3 classical bits
+qc = QuantumCircuit(3, 3)  # 3 qubits and 3 classical bits
+
+# Apply a Hadamard gate on the first qubit (to create superposition)
+qc.h(0)
+
+# Apply a CNOT gate (controlled-X) between qubits 0 (control) and 1 (target)
+qc.cx(0, 1)
+
+# Apply the Toffoli gate (CCNOT) to qubits 0 and 1 as controls, and qubit 2 as target
+qc.ccx(0, 1, 2)
+
+# Measure all qubits and store the result in classical bits
+qc.measure([0, 1, 2], [0, 1, 2])
+
+# Step 2: Visualize the quantum circuit using matplotlib
+circuit_drawer(qc, output='mpl')  # Use 'mpl' for a matplotlib diagram
+
+# Display the circuit
+plt.show()
